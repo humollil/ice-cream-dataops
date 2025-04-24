@@ -5,7 +5,7 @@ modules:
   - name: oee
     location:
       path: modules/bootcamp/use_cases/oee
-      hash: 41060e54
+      hash: 1f726969
     build_variables:
     - key: icapi_ds_external_id
       value: ds_icapi
@@ -59,10 +59,10 @@ modules:
         kind: Function
       - identifier:
           functionExternalId: oee_timeseries
-          name: Run calculations every 5 minutes for last hour of data
+          name: Run calculations every 5 Minutes for last hour of data
         source:
           path: /Users/leotrimhumolli/Library/CloudStorage/OneDrive-Knauf/cognite-bootcamp/workspace/ice-cream-dataops/modules/bootcamp/use_cases/oee/functions/schedules.Schedule.yaml
-          hash: 0cc26f4c
+          hash: b136ecd7
         kind: Schedule
       data_sets:
       - identifier:
@@ -77,7 +77,7 @@ modules:
   - name: ice_cream_api
     location:
       path: modules/bootcamp/ice_cream_api
-      hash: 29b96ad7
+      hash: d3dc5afa
     build_variables:
     - key: icapi_ds_external_id
       value: ds_icapi
@@ -172,6 +172,26 @@ modules:
           path: /Users/leotrimhumolli/Library/CloudStorage/OneDrive-Knauf/cognite-bootcamp/workspace/ice-cream-dataops/modules/bootcamp/ice_cream_api/auth/icapi_extractors.Group.yaml
           hash: 12c6dcce
         kind: Group
+      workflows:
+      - identifier:
+          externalId: wf_icapi_data_pipeline
+        source:
+          path: /Users/leotrimhumolli/Library/CloudStorage/OneDrive-Knauf/cognite-bootcamp/workspace/ice-cream-dataops/modules/bootcamp/ice_cream_api/workflows/wf_icapi_data_pipeline.WorkFlow.yaml
+          hash: ef71ff57
+        kind: Workflow
+      - identifier:
+          externalId: icapi_trigger
+        source:
+          path: /Users/leotrimhumolli/Library/CloudStorage/OneDrive-Knauf/cognite-bootcamp/workspace/ice-cream-dataops/modules/bootcamp/ice_cream_api/workflows/wf_icapi_data_pipeline.WorkFlowTrigger.yaml
+          hash: 4bb02ead
+        kind: WorkflowTrigger
+      - identifier:
+          workflowExternalId: wf_icapi_data_pipeline
+          version: '1'
+        source:
+          path: /Users/leotrimhumolli/Library/CloudStorage/OneDrive-Knauf/cognite-bootcamp/workspace/ice-cream-dataops/modules/bootcamp/ice_cream_api/workflows/wf_icapi_data_pipeline.WorkFlowVersion.yaml
+          hash: 3e2f613e
+        kind: WorkflowVersion
       hosted_extractors:
       - identifier:
           externalId: ICAPI Time series
